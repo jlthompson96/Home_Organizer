@@ -1,2 +1,2 @@
-# Gift_Card_Organizer
+# Gift Card Organizer
 Web app to keep track of gift cards
