@@ -1,0 +1,36 @@
+body {
+    background: #005AA7;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFDE4, #005AA7);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFDE4, #005AA7);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.block-data {
+    background-color: white;
+    color: rgb(10, 71, 121);
+    padding: 1.5em;
+    border-radius: .4em;
+    border-radius: 10px;
+    box-shadow:
+        0 20px 30px 0 rgba(0, 0, 0, .1),
+        0 4px 4px 0 rgba(0, 0, 0, .15);
+}
+
+.vertical {
+    border-left: 4px solid rgb(156, 184, 200);
+    height: 80px;
+    position:absolute;
+    left: 45%;
+}
+
+footer {
+    text-align: center;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    color: rgb(112, 112, 112);
+}
