@@ -11,7 +11,7 @@ public class SpringBootInitializer {
 
     @RequestMapping("/")
     String home() {
-        return "Hello World!";
+        return "Hello SpringBoot";
     }
 
     public static void main(String[] args) {
