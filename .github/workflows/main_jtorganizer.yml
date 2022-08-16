@@ -50,4 +50,4 @@ jobs:
           app-name: 'jtOrganizer'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A131DF65D447406987BF6FBB592BB54D }}
-          package: '*.war'
+          package: '*.jar'
