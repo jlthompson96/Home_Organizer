@@ -12,7 +12,7 @@
 <div th:insert="navigation :: navbar"></div>
 
 <div class="container">
-    <img src="assets/wine.png" alt="Wine Glass" style="height: 250px; width:300px">
+    <img src="assets/wine.png" alt="Wine Glass" style="height: 250px; width:300px; padding-top:20px;">
     <div class="mainCardData">
         <div class="block-data" style="margin-top: 20px;">
             <h3>Wine Tracker</h3>
@@ -65,10 +65,12 @@
                     <div class="mb-3 needs-validation" novalidate>
                         <label for="wineType" class="form-label">Wine Type</label>
                         <select class="form-select" aria-label="Default select example" id="wineType" required>
-                            <option value="">Open this select menu</option>
-                            <option value="Cabernet">Cabernet</option>
+                            <option value="">-- Wine Type --</option>
+                            <option value="Cabernet Sauvignon">Cabernet Sauvignon</option>
                             <option value="Pinot Noir">Pinot Noir</option>
                             <option value="Chardonnay">Chardonnay</option>
+                            <option value="Zinfandel">Zinfandel</option>
+                            <option value="Sauvignon Blanc">Sauvignon Blanc</option>
                         </select>
                         <div class="invalid-feedback">
                             Please select a wine type
