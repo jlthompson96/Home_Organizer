@@ -37,8 +37,7 @@
             <table class="stock-data table table-hover" id="stockTable">
                 <thead>
                 <tr>
-                    <th scope="col">Logo</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Vendor</th>
                     <th scope="col">Amount ($)</th>
                     <th scope="col">Date Purchased</th>
                     <th scope="col">Fuel Points Received</th>
@@ -47,7 +46,6 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td id="logo"></td>
                     <td id="name"></td>
                     <td id="giftCardAmt"></td>
                     <td id="datePurchased"></td>
@@ -74,10 +72,6 @@
             </div>
             <div class="modal-body">
                 <form class="needs-validation" novalidate>
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Gift Card Logo</label>
-                        <input class="form-control" type="file" id="formFile">
-                    </div>
                     <div class="mb-3 needs-validation">
                         <label for="exampleInputEmail1" class="form-label">Gift Card Vendor</label>
                         <input type="text" class="form-control" id="exampleInputEmail1" required>
@@ -93,6 +87,13 @@
                         <span class="input-group-text">0.00</span>
                         <div class="invalid-feedback">
                             Please enter the gift card value.
+                        </div>
+                    </div>
+                    <div class="mb-3 needs-validation">
+                        <label for="fuelPtsEarned" class="form-label">Fuel Points Earned</label>
+                        <input type="text" class="form-control" id="fuelPtsEarned" required>
+                        <div class="invalid-feedback">
+                            Please enter number of fuel points earned.
                         </div>
                     </div>
                     <div class="mb-3">
