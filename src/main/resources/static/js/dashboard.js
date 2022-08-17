@@ -17,3 +17,9 @@
         }, false)
     })
 })()
+
+$("#wineValue,#cardAmount").bind("keyup blur change", function (event) {
+    let inputValue = $(this).val();
+    inputValue = inputValue.replaceAll(/\D/g,"");
+    $(this).val(inputValue);
+});
