@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StufforganizerApplication {
+public class stuffOrganizerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StufforganizerApplication.class, args);
+		SpringApplication.run(stuffOrganizerApplication.class, args);
 	}
 
 }
