@@ -8,6 +8,6 @@ public class giftCardController {
 
     @GetMapping("/")
     public String getLoginPage(){
-        return "dashboard";
+        return "giftcardfuelpoints";
     }
 }
