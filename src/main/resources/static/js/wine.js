@@ -34,7 +34,6 @@ $(document).ready(function(){
 
 
 function submitWineForm(){
-debugger;
     let basePrice = $('#wineValue').val();
     let formattedValue = basePrice.replace(/\D/g, '');
     let addCurrency = formattedValue.toLocaleString("en-US", {style:"currency", currency:"USD",});

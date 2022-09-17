@@ -10,14 +10,12 @@ import com.organizer.stufforganizer.Repository.wineRepository;
 import com.organizer.stufforganizer.Entity.wineEntity;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 @Controller
 public class wineTrackerController {
 
 List<wineEntity> wineList = new ArrayList<>();
+
     @Autowired
     private wineRepository wineRepo;
 

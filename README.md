@@ -7,3 +7,4 @@ A Spring Boot Web app to keep track of whatever lol. 😊
 - HTML / CSS
 - JavaScript
 - Maven
+- MySQL
