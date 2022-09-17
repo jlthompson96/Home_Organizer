@@ -20,8 +20,9 @@
                     data-bs-target="#staticBackdrop">Add a New Wine</button>
         </div>
     </div>
+    <div id="postResultDiv" style="height=50%; width:100%;"></div>
     <section id="wineTableSection" class="block-data" style="margin-top: 20px;">
-        <table class="table table-hover">
+        <table class="table table-hover" style="text-align: center;">
             <thead>
             <tr>
                 <th scope="col">Brand</th>
@@ -29,13 +30,16 @@
                 <th scope="col">Price</th>
                 <th scope="col">Location Purchased</th>
                 <th scope="col">Date Purchased</th>
-                <th scope="col">Edit</th>
+                <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody id="wineTableBody">
             </tbody>
         </table>
     </section>
+    <footer>
+        <p>Version: Alpha 0.9.16</p>
+    </footer>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -46,19 +50,19 @@
                 <h5 class="modal-title" id="staticBackdropLabel">Add a New Wine</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="wineForm">
                 <form class="needs-validation" novalidate>
                     <div class="mb-3">
                         <label for="wineBrand" class="form-label">Brand</label>
                         <input type="text" class="form-control"
-                               aria-label="Gift Card Amount (with dot and two decimal places)" id="wineBrand" required>
+                               aria-label="Gift Card Amount (with dot and two decimal places)" id="wineBrand" name="wineBrand" required>
                         <div class="invalid-feedback">
                             Please enter the wine brand
                         </div>
                     </div>
                     <div class="mb-3 needs-validation" novalidate>
                         <label for="wineType" class="form-label">Wine Type</label>
-                        <select class="form-select" aria-label="Default select example" id="wineType" required>
+                        <select class="form-select" aria-label="Default select example" id="wineType" name="wineType" required>
                             <option value="">-- Wine Type --</option>
                             <option value="Cabernet Sauvignon">Cabernet Sauvignon</option>
                             <option value="Pinot Noir">Pinot Noir</option>
@@ -73,7 +77,7 @@
                     <label class="form-label">Location</label>
                     <div class="input-group needs-validation" novalidate>
                         <input type="text" class="form-control"
-                               aria-label="Gift Card Amount (with dot and two decimal places)" required>
+                               aria-label="Gift Card Amount (with dot and two decimal places)" name="location" id="location" required>
                         <div class="invalid-feedback">
                             Please enter where the wine was purchased
                         </div>
@@ -81,7 +85,7 @@
                         <label for="wineValue" class="form-label" style="padding-top: 10px">Value</label>
                     <div class="input-group mb-3 needs-validation" novalidate>
                         <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="wineValue" required>
+                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="wineValue" name="wineValue"required>
                         <div class="invalid-feedback">
                             Please enter the wine value
                         </div>
@@ -89,12 +93,12 @@
                     <div class="mb-3 needs-validation" novalidate>
                         <label class="form-label">Date Purchased</label>
                         <input type="date" class="form-control"
-                               aria-describedby="emailHelp" required>
+                               aria-describedby="emailHelp" name="datePurchased" id="datePurchased" required>
                         <div class="invalid-feedback">
                             Please enter the wine purchase date.
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button class="btn btn-primary" type="submit" onclick="submitWineForm()">Submit</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -103,10 +107,6 @@
         </div>
     </div>
 </div>
-
-<footer>
-    <p>Version: Alpha 0.8.16</p>
-</footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="js/wine.js"></script>

@@ -1,16 +1,23 @@
 package com.organizer.stufforganizer.Controller;
 
+import com.organizer.stufforganizer.Entity.ServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.organizer.stufforganizer.Repository.wineRepository;
 import com.organizer.stufforganizer.Entity.wineEntity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class wineTrackerController {
 
+List<wineEntity> wineList = new ArrayList<>();
     @Autowired
     private wineRepository wineRepo;
 
@@ -18,21 +25,21 @@ public class wineTrackerController {
     public String getWinePage() {return "wineTracker";}
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addNewWine(@RequestParam String wineType, @RequestParam String wineValue, @RequestParam String wineBrand, @RequestParam String location, @RequestParam String datePurchased) {
-            wineEntity wine = new wineEntity();
-            wine.setWineType(wineType);
-            wine.setWineValue(wineValue);
-            wine.setWineBrand(wineBrand);
-            wine.setLocation(location);
-            wine.setDatePurchased(datePurchased);
-            wineRepo.save(wine);
-            return "Saved";
+    public ResponseEntity<Object> addNewWine(@RequestBody wineEntity wine) {
+        wineList.add(wine);
+        ServiceResponse<wineEntity> response = new ServiceResponse<wineEntity>("success", wine);
+        wine.setWineType(wine.getWineType());
+        wine.setWineValue(wine.getWineValue());
+        wine.setWineBrand(wine.getWineBrand());
+        wine.setLocation(wine.getLocation());
+        wine.setDatePurchased(wine.getDatePurchased());
+        wineRepo.save(wine);
+        return new ResponseEntity<Object>(response, HttpStatus.OK);
         }
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<wineEntity> getAllWines() {
         // This returns a JSON or XML with the wines
-        System.out.println(wineRepo.findAll());
         return wineRepo.findAll();
     }
 }
