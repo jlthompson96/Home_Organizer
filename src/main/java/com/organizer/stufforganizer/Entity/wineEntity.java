@@ -1,29 +1,39 @@
 package com.organizer.stufforganizer.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.sql.Date;
+import javax.persistence.*;
+import java.io.Serializable;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
-public class wineEntity {
+public class wineEntity implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
 
+    @Column(name = "wineType")
     private String wineType;
+
+    @Column(name = "wineValue")
     private String wineValue;
+
+    @Column(name = "wineBrand")
     private String wineBrand;
+
+    @Column(name = "location")
     private String location;
+
+    @Column(name = "datePurchased")
     private String datePurchased;
 
 }
