@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import com.organizer.stufforganizer.Repository.wineRepository;
 import com.organizer.stufforganizer.Entity.wineEntity;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 public class wineTrackerController {
@@ -36,6 +34,12 @@ List<wineEntity> wineList = new ArrayList<>();
         wineRepo.save(wine);
         return new ResponseEntity<Object>(response, HttpStatus.OK);
         }
+    @PostMapping(path = "/delete")
+        public ResponseEntity<Object> deleteAWine(@RequestBody wineEntity wine){
+        ServiceResponse<wineEntity> response = new ServiceResponse<wineEntity>("success", wine);
+        return new ResponseEntity<Object>(response, HttpStatus.OK);
+
+    }
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<wineEntity> getAllWines() {
