@@ -2,7 +2,7 @@ $(document).ready(function(){
     $.ajax({
         type: "GET", url: "/allCards", success: function(result){
             $.each(result, function(i, giftCard){
-                $('#giftCardTableBody').append('<tr><td>' + giftCard.vendor + '</td><td>' + giftCard.amount + '</td><td>' + giftCard.amount + '</td><td>' + giftCard.fuelPointsEarned + '</td><td>' + giftCard.location + '</td><td>' + giftCard.used + '</td><td>' + '<button style="margin-right:20px;" "type="button" class="btn btn-warning">Edit</button>' + '<button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"class="btn btn-danger">Delete</button>' + '</td></tr>');
+                $('#giftCardTableBody').append('<tr><td>' + giftCard.vendor + '</td><td>' + giftCard.amount + '</td><td>' + giftCard.datePurchased + '</td><td>' + giftCard.fuelPointsEarned + '</td><td>' + giftCard.location + '</td><td>' + giftCard.used + '</td><td>' + '<button style="margin-right:20px;" "type="button" class="btn btn-warning">Edit</button>' + '<button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"class="btn btn-danger">Delete</button>' + '</td></tr>');
             });
         }
     });
