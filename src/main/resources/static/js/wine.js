@@ -2,7 +2,7 @@ $(document).ready(function(){
     $.ajax({
         type: "GET", url: "/all", success: function(result){
             $.each(result, function(i, wine){
-                $('#wineTableBody').append('<tr><td>' + wine.wineBrand + '</td><td>' + wine.wineType + '</td><td>' + wine.wineValue + '</td><td>' + wine.location + '</td><td>' + wine.datePurchased + '</td><td>' + '<button style="margin-right:20px;" "type="button" class="btn btn-warning">Edit</button>' + '<button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"class="btn btn-danger">Delete</button>' + '</td></tr>');
+                $('#wineTableBody').append('<tr><td>' + wine.wineBrand + '</td><td>' + wine.wineType + '</td><td>' + wine.wineValue + '</td><td>' + wine.location + '</td><td>' + wine.datePurchased + '</td><td>' + wine.quantity + '</td><td>' + '<button style="margin-right:20px;" "type="button" class="btn btn-warning">Edit</button>' + '<button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"class="btn btn-danger">Delete</button>' + '</td></tr>');
             });
         }
     });
@@ -24,15 +24,16 @@ var output = d.getFullYear() + '-' +
 
 $('#wineFormSubButton').click(function (event) {
     let basePrice = $('#wineValue').val();
-    let formattedValue = basePrice.replace(/\D/g, '');
-    let addCurrency = formattedValue.toLocaleString("en-US", {style:"currency", currency:"USD",});
+    let formattedValue = basePrice.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
+    let addCurrency = Number(formattedValue).toLocaleString('en-US', {style: 'currency', currency: 'USD'});
 
     var formData = {
             wineType : $('#wineType').val(),
             wineValue: addCurrency,
             wineBrand: $('#wineBrand').val(),
             location: $('#location').val(),
-            datePurchased: $('#datePurchased').val()
+            datePurchased: $('#datePurchased').val(),
+            quantity: $('#quantity').val()
     };
     event.preventDefault();
     if ($('#wineForm')[0].checkValidity() === false) {

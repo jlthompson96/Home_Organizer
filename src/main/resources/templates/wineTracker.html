@@ -29,6 +29,7 @@
                 <th scope="col">Price</th>
                 <th scope="col">Location Purchased</th>
                 <th scope="col">Date Purchased</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
@@ -98,6 +99,14 @@
                         <button class="btn btn-primary" type="button" onclick="getCurrentDateButton()">Get Current Date</button>
                         <div class="invalid-feedback">
                             Please enter the wine purchase date.
+                        </div>
+                    </div>
+                    <label class="form-label">Quantity</label>
+                    <div class="input-group needs-validation">
+                        <input type="number" class="form-control"
+                               aria-label="Wine Quantity" name="Quantity" id="quantity" required>
+                        <div class="invalid-feedback">
+                            Please enter a numeric value for the quantity
                         </div>
                     </div>
                 </form>

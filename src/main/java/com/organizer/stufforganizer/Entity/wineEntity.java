@@ -36,4 +36,7 @@ public class wineEntity implements Serializable {
     @Column(name = "datePurchased")
     private String datePurchased;
 
+    @Column(name = "quantity")
+    private String quantity;
+
 }

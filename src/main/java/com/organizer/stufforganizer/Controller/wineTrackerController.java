@@ -31,6 +31,7 @@ List<wineEntity> wineList = new ArrayList<>();
         wine.setWineBrand(wine.getWineBrand());
         wine.setLocation(wine.getLocation());
         wine.setDatePurchased(wine.getDatePurchased());
+        wine.setQuantity(wine.getQuantity());
         wineRepo.save(wine);
         return new ResponseEntity<Object>(response, HttpStatus.OK);
         }
