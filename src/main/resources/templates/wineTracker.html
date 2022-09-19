@@ -9,7 +9,7 @@
 </head>
 
 <div th:insert="navigation :: navbar"></div>
-
+<body>
 <div class="container">
     <img src="assets/wine.png" alt="Wine Glass" style="height: 250px; width:300px; padding-top:20px;">
     <div class="mainCardData">
@@ -85,7 +85,7 @@
                         <label for="wineValue" class="form-label" style="padding-top: 10px">Value</label>
                     <div class="input-group mb-3 needs-validation">
                         <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="wineValue" name="wineValue"required>
+                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="wineValue" name="wineValue" required>
                         <div class="invalid-feedback">
                             Please enter the wine value
                         </div>
@@ -106,7 +106,7 @@
                         <input type="number" class="form-control"
                                aria-label="Wine Quantity" name="Quantity" id="quantity" required>
                         <div class="invalid-feedback">
-                            Please enter a numeric value for the quantity
+                            Please enter a whole number for the quantity
                         </div>
                     </div>
                 </form>
