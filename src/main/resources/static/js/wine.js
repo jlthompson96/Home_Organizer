@@ -72,6 +72,7 @@ $('#wineFormSubButton').click(function (event) {
     $('#wineForm').addClass('was-validated');
 });
 
+
 // Logic for deleting a wine
 $(document).delegate('.delete', 'click', function() {
 
@@ -101,42 +102,26 @@ $(document).delegate('.delete', 'click', function() {
     });
 });
 
+
 // Logic for editing a wine
-$(document).delegate('.edit', 'click', function() {
-    var parent = $(this).parent().parent();
-
-    var id = parent.children("td:nth-child(1)");
-    var name = parent.children("td:nth-child(2)");
-    var buttons = parent.children("td:nth-child(3)");
-
-    name.html("<input type='text' id='txtName' value='" + name.html() + "'/>");
-    buttons.html("<button id='save'>Save</button>&nbsp;&nbsp;<button class='delete' id='" + id.html() + "'>Delete</button>");
-});
-
-$(document).delegate('#save', 'click', function() {
-    var parent = $(this).parent().parent();
-
-    var id = parent.children("td:nth-child(1)");
-    var name = parent.children("td:nth-child(2)");
-    var buttons = parent.children("td:nth-child(3)");
-
-    $.ajax({
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        url: "http://localhost:8080/company/save",
-        data: JSON.stringify({'id' : id.html(), 'name' : name.children("input[type=text]").val()}),
-        cache: false,
-        success: function() {
-            name.html(name.children("input[type=text]").val());
-            buttons.html("<button class='edit' id='" + id.html() + "'>Edit</button>&nbsp;&nbsp;<button class='delete' id='" + id.html() + "'>Delete</button>");
-        },
-        error: function() {
-            $('#err').html('<span style=\'color:red; font-weight: bold; font-size: 30px;\'>Error updating record').fadeIn().fadeOut(4000, function() {
-                $(this).remove();
-            });
-        }
-    });
-});
+//$(document).delegate('.edit', 'click', function() {
+//    var id = $(this).attr('id');
+//    $.ajax({
+//        type: "GET",
+//        url: "/wine/" + id,
+//        cache: false,
+//        success: function(wine) {
+//
+//        //Remove the $ from the wine value
+//        let formattedValue = wine.wineValue.replace(/[&\/\\#+()$~%'":*?<>{}]/g, '');
+//
+//            $('#editWineType').val(wine.wineType);
+//            $('#editWineValue').val(formattedValue);
+//            $('#editWineBrand').val(wine.wineBrand);
+//            $('#editLocation').val(wine.location);
+//            $('#editDatePurchased').val(wine.datePurchased);
+//            $('#editQuantity').val(wine.quantity);
+//};)));
 
 
 

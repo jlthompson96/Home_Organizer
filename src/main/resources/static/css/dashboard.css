@@ -26,6 +26,12 @@ body {
     left: 45%;
 }
 
+#intro {
+    text-align: center;
+    color: black;
+    margin-top: 20px;
+}
+
 footer {
     text-align: center;
     width: 100%;

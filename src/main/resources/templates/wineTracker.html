@@ -40,7 +40,7 @@
     </section>
         <p style="text-align:center;">Version: Alpha 0.9.16</p>
 </div>
-<!-- Modal -->
+<!-- Add a New Wine Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -118,7 +118,7 @@
     </div>
 </div>
 
-<!-- Delete Dialog Modal -->
+<!-- Delete a Wine Modal -->
 <div class="modal" id="deleteModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -132,6 +132,84 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" id="deleteModalBtn" class="btn btn-primary">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit and Update a Wine Modal -->
+<div class="modal fade" id="updateWineModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editStaticBackdropLabel">Update the Wine</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" method="post" id="editWineForm">
+                    <div class="mb-3">
+                        <label for="wineBrand" class="form-label">Brand</label>
+                        <input type="text" class="form-control"
+                               aria-label="Gift Card Amount (with dot and two decimal places)" id="editWineBrand" name="wineBrand" required>
+                        <div class="invalid-feedback">
+                            Please enter the wine brand
+                        </div>
+                    </div>
+                    <div class="mb-3 needs-validation">
+                        <label for="wineType" class="form-label">Wine Type</label>
+                        <select class="form-select" aria-label="Default select example" id="editWineType" name="wineType" required>
+                            <option value="">-- Wine Type --</option>
+                            <option value="Cabernet Sauvignon">Cabernet Sauvignon</option>
+                            <option value="Pinot Noir">Pinot Noir</option>
+                            <option value="Chardonnay">Chardonnay</option>
+                            <option value="Zinfandel">Zinfandel</option>
+                            <option value="Sauvignon Blanc">Sauvignon Blanc</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a wine type
+                        </div>
+                    </div>
+                    <label class="form-label">Location</label>
+                    <div class="input-group needs-validation">
+                        <input type="text" class="form-control"
+                               aria-label="Gift Card Amount (with dot and two decimal places)" name="location" id="editLocation" required>
+                        <div class="invalid-feedback">
+                            Please enter where the wine was purchased
+                        </div>
+                    </div>
+                    <label for="wineValue" class="form-label" style="padding-top: 10px">Value</label>
+                    <div class="input-group mb-3 needs-validation">
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="editWineValue" name="wineValue" required>
+                        <div class="invalid-feedback">
+                            Please enter the wine value
+                        </div>
+                    </div>
+                    <div class="mb-3 needs-validation">
+                        <label class="form-label">Date Purchased</label>
+                        <input type="date" class="form-control"
+                               aria-describedby="emailHelp" name="datePurchased" id="editDatePurchased" required>
+                        <br>
+
+                        <button class="btn btn-primary" type="button" onclick="getCurrentDateButton()">Get Current Date</button>
+                        <div class="invalid-feedback">
+                            Please enter the wine purchase date.
+                        </div>
+                    </div>
+                    <label class="form-label">Quantity</label>
+                    <div class="input-group needs-validation">
+                        <input type="number" class="form-control"
+                               aria-label="Wine Quantity" name="Quantity" id="editQuantity" required>
+                        <div class="invalid-feedback">
+                            Please enter a whole number for the quantity
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="wineFormSubButton" type="submit">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

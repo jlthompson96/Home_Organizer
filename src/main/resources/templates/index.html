@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="css/dashboard.css" rel="stylesheet">
+    <title>Home</title>
+</head>
+<body>
+<div th:replace="navigation :: navbar"></div>
+<div class="container">
+    <div id="intro">
+        <h1>Welcome to Home Organizer!</h1>
+        <h3>Select what you would like to organize.</h3>
+    </div>
+  <div class="row justify-content-md-center">
+      <div class="block-data col-5" style="margin-top: 20px; margin-right:20px;">
+          <h2>Gift Cards &amp; Fuel Points Tracker</h2>
+          <p>Track your gift cards and how many fuel points you have collected</p>
+          <p><a class="btn btn-secondary" href="/giftcards" role="button">Go &raquo;</a></p>
+      </div>
+      <div class="block-data col-5" style="margin-top: 20px;">
+        <h2>Wine Tracker</h2>
+        <p>Track your wine collection and keep track of your favorite wines.</p>
+        <p><a class="btn btn-secondary" href="/wine" role="button">Go &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
