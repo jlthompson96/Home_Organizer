@@ -1,14 +1,15 @@
 $(document).ready(function(){
     $.ajax({
-        type: "GET", url: "/all", success: function(result){
+        type: "GET", url: "/wineList", success: function(result){
             $.each(result, function(i, wine){
-                $('#wineTableBody').append('<tr><td>' + wine.wineBrand + '</td><td>' + wine.wineType + '</td><td>' + wine.wineValue + '</td><td>' + wine.location + '</td><td>' + wine.datePurchased + '</td><td>' + wine.quantity + '</td><td>' + '<button style="margin-right:20px;" "type="button" class="btn btn-warning">Edit</button>' + '<button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"class="btn btn-danger">Delete</button>' + '</td></tr>');
+                $('#wineTableBody').append('<tr><td>' + wine.wineBrand + '</td><td>' + wine.wineType + '</td><td>' + wine.wineValue + '</td><td>' + wine.location + '</td><td>' + wine.datePurchased + '</td><td>' + wine.quantity + '</td><td>' + '<button style="margin-right:20px;" "type="button" id="'+wine.id+'" class="btn btn-warning edit">Edit</button>' + '<button type="button" id="'+wine.id+'" class="btn btn-danger delete">Delete</button>' + '</td></tr>');
             });
         }
     });
 });
 
 
+// Logic for the get current date button
 function getCurrentDateButton(){
 var d = new Date();
 
@@ -22,6 +23,8 @@ var output = d.getFullYear() + '-' +
     $('#datePurchased').val(output);
 }
 
+
+// Logic for adding a new wine
 $('#wineFormSubButton').click(function (event) {
     let basePrice = $('#wineValue').val();
     let formattedValue = basePrice.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
@@ -42,7 +45,7 @@ $('#wineFormSubButton').click(function (event) {
        $.ajax({
            type : "POST",
            contentType : "application/json",
-           url : "/add",
+           url : "/wine/save",
            data : JSON.stringify(formData),
            dataType : 'json',
            success : function(result) {
@@ -60,10 +63,74 @@ $('#wineFormSubButton').click(function (event) {
                loadWineTable();
            },
            error : function(e) {
-               alert("Error!")
+               console.log(formData);
                console.log("ERROR: ", e);
+               location.reload();
            }
        });
     }
     $('#wineForm').addClass('was-validated');
 });
+
+// Logic for deleting a wine
+$(document).delegate('.delete', 'click', function() {
+    if (confirm('Do you really want to delete this wine?')) {
+        var id = $(this).attr('id');
+        alert("Wine ID: " + id);
+        var parent = $(this).parent().parent();
+        $.ajax({
+            type: "DELETE",
+            url: "/wine/delete/" + id,
+            cache: false,
+            success: function() {
+                    $(this).remove();
+                location.reload(true)
+            },
+            error: function() {
+                $('#err').html('<span style=\'color:red; font-weight: bold; font-size: 30px;\'>Error deleting record').fadeIn().fadeOut(4000, function() {
+                    $(this).remove();
+                });
+            }
+        });
+    }
+});
+
+// Logic for editing a wine
+$(document).delegate('.edit', 'click', function() {
+    var parent = $(this).parent().parent();
+
+    var id = parent.children("td:nth-child(1)");
+    var name = parent.children("td:nth-child(2)");
+    var buttons = parent.children("td:nth-child(3)");
+
+    name.html("<input type='text' id='txtName' value='" + name.html() + "'/>");
+    buttons.html("<button id='save'>Save</button>&nbsp;&nbsp;<button class='delete' id='" + id.html() + "'>Delete</button>");
+});
+
+$(document).delegate('#save', 'click', function() {
+    var parent = $(this).parent().parent();
+
+    var id = parent.children("td:nth-child(1)");
+    var name = parent.children("td:nth-child(2)");
+    var buttons = parent.children("td:nth-child(3)");
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "http://localhost:8080/company/save",
+        data: JSON.stringify({'id' : id.html(), 'name' : name.children("input[type=text]").val()}),
+        cache: false,
+        success: function() {
+            name.html(name.children("input[type=text]").val());
+            buttons.html("<button class='edit' id='" + id.html() + "'>Edit</button>&nbsp;&nbsp;<button class='delete' id='" + id.html() + "'>Delete</button>");
+        },
+        error: function() {
+            $('#err').html('<span style=\'color:red; font-weight: bold; font-size: 30px;\'>Error updating record').fadeIn().fadeOut(4000, function() {
+                $(this).remove();
+            });
+        }
+    });
+});
+
+
+

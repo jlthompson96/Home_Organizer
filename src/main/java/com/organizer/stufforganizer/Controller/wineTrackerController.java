@@ -1,51 +1,44 @@
 package com.organizer.stufforganizer.Controller;
 
-import com.organizer.stufforganizer.Entity.ServiceResponse;
+import com.organizer.stufforganizer.Service.wineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import com.organizer.stufforganizer.Repository.wineRepository;
 import com.organizer.stufforganizer.Entity.wineEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class wineTrackerController {
 
-List<wineEntity> wineList = new ArrayList<>();
-
     @Autowired
-    private wineRepository wineRepo;
+    private wineService wineService;
 
     @GetMapping("/wine")
-    public String getWinePage() {return "wineTracker";}
+    public String getWinePage() {
+        return "wineTracker";
+    }
+    @GetMapping("/wineList")
+    public ResponseEntity<List<wineEntity>> getWineList() {
+        return new ResponseEntity<List<wineEntity>>(wineService.getWineList(), HttpStatus.OK);
+    }
 
-    @PostMapping(path = "/add")
-    public ResponseEntity<Object> addNewWine(@RequestBody wineEntity wine) {
-        wineList.add(wine);
-        ServiceResponse<wineEntity> response = new ServiceResponse<wineEntity>("success", wine);
-        wine.setWineType(wine.getWineType());
-        wine.setWineValue(wine.getWineValue());
-        wine.setWineBrand(wine.getWineBrand());
-        wine.setLocation(wine.getLocation());
-        wine.setDatePurchased(wine.getDatePurchased());
-        wine.setQuantity(wine.getQuantity());
-        wineRepo.save(wine);
-        return new ResponseEntity<Object>(response, HttpStatus.OK);
+    @GetMapping("/wine/{id}")
+    public ResponseEntity<wineEntity> getWineById(@PathVariable int id) {
+        return new ResponseEntity<wineEntity>(wineService.getWineById(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/wine/save")
+    public ResponseEntity<Void> saveOrUpdateWine(@RequestBody wineEntity wine) {
+        wineService.saveOrUpdate(wine);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/wine/delete/{id}")
+        public ResponseEntity<Void> deleteWine(@PathVariable int id) {
+            wineService.delete(id);
+            return new ResponseEntity<Void>(HttpStatus.OK);
         }
-    @PostMapping(path = "/delete")
-        public ResponseEntity<Object> deleteAWine(@RequestBody wineEntity wine){
-        ServiceResponse<wineEntity> response = new ServiceResponse<wineEntity>("success", wine);
-        return new ResponseEntity<Object>(response, HttpStatus.OK);
-
-    }
-
-    @GetMapping(path="/all")
-    public @ResponseBody Iterable<wineEntity> getAllWines() {
-        // This returns a JSON or XML with the wines
-        return wineRepo.findAll();
-    }
 }
