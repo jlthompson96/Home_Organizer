@@ -74,10 +74,16 @@ $('#wineFormSubButton').click(function (event) {
 
 // Logic for deleting a wine
 $(document).delegate('.delete', 'click', function() {
-    if (confirm('Do you really want to delete this wine?')) {
+
+        //Save wine id
         var id = $(this).attr('id');
-        alert("Wine ID: " + id);
         var parent = $(this).parent().parent();
+
+    //Open Modal
+    $('#deleteModal').modal('show');
+
+    //Delete wine
+    $(document).delegate('#deleteModalBtn', 'click', function() {
         $.ajax({
             type: "DELETE",
             url: "/wine/delete/" + id,
@@ -92,7 +98,7 @@ $(document).delegate('.delete', 'click', function() {
                 });
             }
         });
-    }
+    });
 });
 
 // Logic for editing a wine
