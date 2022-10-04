@@ -76,9 +76,9 @@ $('#wineFormSubButton').click(function (event) {
 // Logic for deleting a wine
 $(document).delegate('.delete', 'click', function() {
 
-        //Save wine id
-        var id = $(this).attr('id');
-        var parent = $(this).parent().parent();
+    //Save wine id
+    var id = $(this).attr('id');
+    var parent = $(this).parent().parent();
 
     //Open Modal
     $('#deleteModal').modal('show');
@@ -104,24 +104,94 @@ $(document).delegate('.delete', 'click', function() {
 
 
 // Logic for editing a wine
-//$(document).delegate('.edit', 'click', function() {
-//    var id = $(this).attr('id');
-//    $.ajax({
-//        type: "GET",
-//        url: "/wine/" + id,
-//        cache: false,
-//        success: function(wine) {
-//
-//        //Remove the $ from the wine value
-//        let formattedValue = wine.wineValue.replace(/[&\/\\#+()$~%'":*?<>{}]/g, '');
-//
-//            $('#editWineType').val(wine.wineType);
-//            $('#editWineValue').val(formattedValue);
-//            $('#editWineBrand').val(wine.wineBrand);
-//            $('#editLocation').val(wine.location);
-//            $('#editDatePurchased').val(wine.datePurchased);
-//            $('#editQuantity').val(wine.quantity);
-//};)));
+$(document).delegate('.edit', 'click', function() {
+    var id = $(this).attr('id');
+    $.ajax({
+        type: "GET",
+        url: "/wine/" + id,
+        cache: false,
+        success: function(wine) {
 
+        //Remove the $ from the wine value
+        let formattedValue = wine.wineValue.replace(/[&\/\\#+()$~%'":*?<>{}]/g, '');
 
+            $('#editWineType').val(wine.wineType);
+            $('#editWineValue').val(formattedValue);
+            $('#editWineBrand').val(wine.wineBrand);
+            $('#editLocation').val(wine.location);
+            $('#editDatePurchased').val(wine.datePurchased);
+            $('#editQuantity').val(wine.quantity);
+            $('#updateWineModal').modal('show');
+        },
+        error: function() {
+            $('#err').html('<span style=\'color:red; font-weight: bold; font-size: 30px;\'>Error deleting record').fadeIn().fadeOut(4000, function() {
+                $(this).remove();
+            });
+        }})
+        $('#wineFormSaveButton').click(function (event) {
+            let basePrice = $('#editWineValue').val();
+            let formattedValue = basePrice.replace(/[&\/\\#,+()$~%'":*?<>{}]/g, '');
+            let addCurrency = Number(formattedValue).toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+
+            var formData = {
+                    wineType : $('#editWineType').val(),
+                    wineValue: addCurrency,
+                    wineBrand: $('#editWineBrand').val(),
+                    location: $('#editLocation').val(),
+                    datePurchased: $('#editDatePurchased').val(),
+                    quantity: $('#editQuantity').val()
+            };
+            event.preventDefault();
+            if ($('#editWineForm')[0].checkValidity() === false) {
+                event.stopPropagation();
+            } else {
+               $.ajax({
+                   type : "POST",
+                   contentType : "application/json",
+                   url : "/wine/save",
+                   data : JSON.stringify(formData),
+                   dataType : 'json',
+                   success : function(result) {
+                       if (result.status == "success") {
+                           $("#postResultDiv").html(
+                            '<div class="alert alert-success d-flex align-items-center alert-dismissible" role="alert">' +
+                            ' <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>' +
+                            '<div>Successfully added wine!</div></div>');
+                            location.reload();
+                       } else {
+                           $("#postResultDiv").html('<div class="alert alert-danger d-flex align-items-center alert-dismissible" role="alert">' +
+                            '<svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>' +
+                            '<div>There was an error adding the wine!</div></div>');
+                       }
+                       loadWineTable();
+                   },
+                   error : function(e) {
+                       console.log(formData);
+                       console.log("ERROR: ", e);
+                       deleteOldWine(id);
+                       location.reload();
+                   }
+               });
+            }
+            $('#wineForm').addClass('was-validated');
+        });
+
+        });
+
+function deleteOldWine(id){
+    $.ajax({
+        type: "DELETE",
+        url: "/wine/delete/" + id,
+        cache: false,
+        success: function() {
+                $(this).remove();
+            location.reload(true)
+        },
+        error: function() {
+            $('#err').html('<span style=\'color:red; font-weight: bold; font-size: 30px;\'>Error deleting record').fadeIn().fadeOut(4000, function() {
+                $(this).remove();
+            });
+        }
+    });
+}
 
