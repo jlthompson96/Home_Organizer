@@ -7,7 +7,7 @@ $(document).ready(function(){
             $.each(result, function(i, giftCard){
                 $('#giftCardTableBody').append('<tr><td>' + giftCard.vendor + '</td><td>' + giftCard.amount + '</td><td>' + giftCard.datePurchased + '</td><td>' + giftCard.fuelPointsEarned + '</td><td>' + giftCard.location + '</td><td>' + giftCard.used + '</td><td>' + '<button style="margin-right:20px;" "type="button" id="'+giftCard.id+'"class="btn btn-warning edit">Edit</button>' + '<button id="'+giftCard.id+'" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"class="btn btn-danger delete">Delete</button>' + '</td></tr>');
                     //Remove the non-numeric values from the gift card value
-                    let formattedValue = giftCard.amount.replace(/[&\/\\#+()$~%'":*?<>{}]/g, '');
+                    let formattedValue = giftCard.amount.replace(/[&\/\\#+()$~%'":,*?<>{}]/g, '');
 
                     let newNum = parseFloat(formattedValue);
                     let newFuelPointNum = parseInt(giftCard.fuelPointsEarned);
@@ -15,8 +15,9 @@ $(document).ready(function(){
                     fuelPointTotal += newFuelPointNum;
             });
                 let addCurrency = giftCardTotal.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+                let addFuelPoints = fuelPointTotal.toLocaleString();
                 $('#giftCardTotal').text(addCurrency);
-                $('#totalFuelPoints').text(fuelPointTotal);
+                $('#totalFuelPoints').text(addFuelPoints);
         }
     });
 });
